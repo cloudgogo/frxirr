@@ -1,0 +1,204 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<WorkBook xmlVersion="20151125" releaseVersion="8.0.0">
+<Report class="com.fr.report.worksheet.WorkSheet" name="sheet1">
+<ReportPageAttr>
+<HR/>
+<FR/>
+<HC/>
+<FC/>
+</ReportPageAttr>
+<ColumnPrivilegeControl/>
+<RowPrivilegeControl/>
+<RowHeight defaultValue="723900">
+<![CDATA[1333500,1562100,723900,723900,723900,723900,723900,723900,723900,723900,723900,723900,723900,723900,723900,723900,723900,723900,723900,723900,723900,723900,723900,723900,723900,723900,723900,723900,723900,723900,723900,723900,723900,723900,723900,723900,723900,723900,723900,723900,723900,723900,723900,723900,723900,723900,723900,723900,723900,723900,723900]]></RowHeight>
+<ColumnWidth defaultValue="2743200">
+<![CDATA[2743200,2743200,6743700,7734300,3962400,2743200,3086100,2743200,2743200,2743200,2743200,2743200,2743200,2743200,2743200,2743200,2743200,2743200,2743200,2743200,2743200]]></ColumnWidth>
+<CellElementList>
+<C c="0" r="0">
+<PrivilegeControl/>
+<Expand/>
+</C>
+<C c="2" r="0" s="0">
+<O>
+<![CDATA[code]]></O>
+<PrivilegeControl/>
+<Expand/>
+</C>
+<C c="3" r="0" s="0">
+<O>
+<![CDATA[name]]></O>
+<PrivilegeControl/>
+<Expand/>
+</C>
+<C c="4" r="0" s="0">
+<O>
+<![CDATA[num]]></O>
+<PrivilegeControl/>
+<Expand/>
+</C>
+<C c="5" r="0" s="0">
+<O>
+<![CDATA[type]]></O>
+<PrivilegeControl/>
+<Expand/>
+</C>
+<C c="6" r="0" s="0">
+<O>
+<![CDATA[contory]]></O>
+<PrivilegeControl/>
+<Expand/>
+</C>
+<C c="2" r="1" s="1">
+<PrivilegeControl/>
+<Widget class="com.fr.form.ui.TextEditor">
+<Listener event="stopedit">
+<JavaScript class="com.fr.js.JavaScriptImpl">
+<Parameters>
+<Parameter>
+<Attributes name="colnum"/>
+<O t="Formula" class="Formula">
+<Attributes>
+<![CDATA[=col()]]></Attributes>
+</O>
+</Parameter>
+<Parameter>
+<Attributes name="rownum"/>
+<O t="Formula" class="Formula">
+<Attributes>
+<![CDATA[=row()]]></Attributes>
+</O>
+</Parameter>
+</Parameters>
+<Content>
+<![CDATA[var cust_code=this.getValue();
+var timestamp=new Date().getTime();
+var timestampflag=timestamp.toString();
+var cust_name=FR.remoteEvaluate('getCustmerInfo("'+cust_code+'","123456","cust_name","'+timestampflag+'")').toString(); 
+// alert(cust_name);
+var addinfoser_num=FR.remoteEvaluate('getCustmerInfo("'+cust_code+'","123456","addinfoser_num","'+timestampflag+'")').toString(); 
+// alert(addinfoser_num);
+var addr_type=FR.remoteEvaluate('getCustmerInfo("'+cust_code+'","123456","addr_type","'+timestampflag+'")').toString(); 
+// alert(addr_type);
+var country=FR.remoteEvaluate('getCustmerInfo("'+cust_code+'","123456","country","'+timestampflag+'")').toString(); 
+
+// alert(country);
+contentPane.curLGP.setCellValue(colnum,rownum-1,cust_name);
+contentPane.curLGP.setCellValue(colnum+1,rownum-1,addinfoser_num);
+contentPane.curLGP.setCellValue(colnum+2,rownum-1,addr_type);
+contentPane.curLGP.setCellValue(colnum+3,rownum-1,country);]]></Content>
+</JavaScript>
+</Listener>
+<WidgetName name="cust_code"/>
+<WidgetAttr description="">
+<PrivilegeControl/>
+</WidgetAttr>
+<TextAttr/>
+<Reg class="com.fr.form.ui.reg.NoneReg"/>
+<widgetValue/>
+</Widget>
+<Expand/>
+</C>
+<C c="3" r="1" s="1">
+<PrivilegeControl/>
+<Expand/>
+</C>
+<C c="4" r="1" s="1">
+<O>
+<![CDATA[  ]]></O>
+<PrivilegeControl/>
+<Expand/>
+</C>
+<C c="5" r="1" s="1">
+<O>
+<![CDATA[ ]]></O>
+<PrivilegeControl/>
+<Expand/>
+</C>
+<C c="6" r="1" s="1">
+<O>
+<![CDATA[ ]]></O>
+<PrivilegeControl/>
+<Expand/>
+</C>
+<C c="1" r="3">
+<O t="Formula" class="Formula">
+<Attributes>
+<![CDATA[=getCustmerInfo("EO000000000079662","123456","cust_name")]]></Attributes>
+</O>
+<PrivilegeControl/>
+<Expand/>
+</C>
+<C c="1" r="4">
+<PrivilegeControl/>
+<Expand/>
+</C>
+<C c="2" r="5">
+<PrivilegeControl/>
+<Widget class="com.fr.form.ui.FreeButton">
+<Listener event="click">
+<JavaScript class="com.fr.js.JavaScriptImpl">
+<Parameters>
+<Parameter>
+<Attributes name="rowNum"/>
+<O t="Formula" class="Formula">
+<Attributes>
+<![CDATA[=Row()]]></Attributes>
+</O>
+</Parameter>
+<Parameter>
+<Attributes name="colNum"/>
+<O t="Formula" class="Formula">
+<Attributes>
+<![CDATA[=COL()]]></Attributes>
+</O>
+</Parameter>
+</Parameters>
+<Content>
+<![CDATA[var rq=FR.remoteEvaluate('getCustmerInfo("EO000000000079662","123456","cust_name")'); alert(rq);
+contentPane.curLGP.setCellValue(colNum,rowNum-1,"aaaaaa");]]></Content>
+</JavaScript>
+</Listener>
+<WidgetAttr description="">
+<PrivilegeControl/>
+</WidgetAttr>
+<Text>
+<![CDATA[]]></Text>
+</Widget>
+<Expand/>
+</C>
+<C c="8" r="9">
+<PrivilegeControl/>
+<Expand/>
+</C>
+<C c="4" r="10">
+<PrivilegeControl/>
+<Expand/>
+</C>
+</CellElementList>
+<ReportAttrSet>
+<ReportSettings headerHeight="0" footerHeight="0">
+<PaperSetting/>
+</ReportSettings>
+</ReportAttrSet>
+<PrivilegeControl/>
+</Report>
+<ReportParameterAttr>
+<Attributes showWindow="true" delayPlaying="true" windowPosition="1" align="0"/>
+<PWTitle>
+<![CDATA[参数]]></PWTitle>
+</ReportParameterAttr>
+<StyleList>
+<Style imageLayout="1">
+<FRFont name="微软雅黑" style="0" size="72" foreground="-1"/>
+<Background name="ColorBackground" color="-16724737"/>
+<Border/>
+</Style>
+<Style imageLayout="1">
+<FRFont name="微软雅黑" style="0" size="72" foreground="-10066330"/>
+<Background name="NullBackground"/>
+<Border/>
+</Style>
+</StyleList>
+<DesignerVersion DesignerVersion="IAA"/>
+<PreviewType PreviewType="1"/>
+</WorkBook>

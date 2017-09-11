@@ -1,0 +1,12 @@
+var cust_code=this.getValue();
+var timestamp=new Date().getTime();
+var timestampflag=timestamp.toString();
+var cust_name=FR.remoteEvaluate('getCustmerInfo("'+cust_code+'","123456","cust_name","'+timestampflag+'")').toString(); 
+alert(cust_code);
+var addinfoser_num=FR.remoteEvaluate('getCustmerInfo("'+cust_code+'","123456","addinfoser_num","'+timestampflag+'")').toString(); 
+alert(addinfoser_num);
+var addr_type=FR.remoteEvaluate('getCustmerInfo("'+cust_code+'","123456","addr_type","'+timestampflag+'")').toString(); 
+alert(addr_type);
+var country=FR.remoteEvaluate('getCustmerInfo("'+cust_code+'","123456","country","'+timestampflag+'")').toString(); 
+contentPane.curLGP.setCellValue(colnum,rownum,cust_name);
+alert(country);

@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<classpath>
+	<classpathentry kind="src" path="src"/>
+	<classpathentry kind="con" path="org.eclipse.jdt.launching.JRE_CONTAINER/org.eclipse.jdt.internal.debug.ui.launcher.StandardVMType/J2SE-1.5"/>
+	<classpathentry kind="con" path="org.eclipse.jdt.USER_LIBRARY/frlib"/>
+	<classpathentry kind="con" path="org.eclipse.jdt.USER_LIBRARY/axis2-client"/>
+	<classpathentry kind="lib" path="C:/Users/Allen/Desktop/lib/otherlib/sjsxp-1.0.1.jar"/>
+	<classpathentry kind="lib" path="C:/Users/Allen/Desktop/lib/otherlib/wsdl4j-1.6.2.jar"/>
+	<classpathentry kind="lib" path="C:/Users/Allen/Desktop/lib/otherlib/XmlSchema-1.4.7.jar"/>
+	<classpathentry kind="lib" path="C:/Users/Allen/Desktop/lib/otherlib/neethi-3.0.2.jar"/>
+	<classpathentry kind="lib" path="C:/Users/Allen/Desktop/lib/otherlib/mail-1.4.jar"/>
+	<classpathentry kind="lib" path="C:/Users/Allen/Desktop/lib/otherlib/httpcore-4.4.6.jar"/>
+	<classpathentry kind="output" path="bin"/>
+</classpath>
