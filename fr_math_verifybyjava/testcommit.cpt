@@ -1,0 +1,262 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<WorkBook xmlVersion="20151125" releaseVersion="8.0.0">
+<TableDataMap>
+<TableData name="test" class="com.fr.data.impl.DBTableData">
+<Parameters/>
+<Attributes maxMemRowCount="-1"/>
+<Connection class="com.fr.data.impl.NameDatabaseConnection">
+<DatabaseName>
+<![CDATA[testdb]]></DatabaseName>
+</Connection>
+<Query>
+<![CDATA[select * from test]]></Query>
+</TableData>
+</TableDataMap>
+<Report class="com.fr.report.worksheet.WorkSheet" name="sheet1">
+<ReportPageAttr>
+<HR/>
+<FR/>
+<HC/>
+<FC/>
+</ReportPageAttr>
+<ColumnPrivilegeControl/>
+<RowPrivilegeControl/>
+<RowHeight defaultValue="723900">
+<![CDATA[723900,1181100,990600,723900,723900,723900,723900,723900,723900,723900,723900]]></RowHeight>
+<ColumnWidth defaultValue="2743200">
+<![CDATA[2171700,2743200,4305300,6781800,8763000,2743200,2743200,2743200,2743200,2743200,2743200]]></ColumnWidth>
+<CellElementList>
+<C c="0" r="0">
+<PrivilegeControl/>
+<Expand/>
+</C>
+<C c="0" r="1">
+<PrivilegeControl/>
+<Expand/>
+</C>
+<C c="1" r="1" s="0">
+<O>
+<![CDATA[id]]></O>
+<PrivilegeControl/>
+<Expand/>
+</C>
+<C c="2" r="1" s="0">
+<O>
+<![CDATA[name]]></O>
+<PrivilegeControl/>
+<Expand/>
+</C>
+<C c="3" r="1" s="0">
+<O>
+<![CDATA[description]]></O>
+<PrivilegeControl/>
+<Expand/>
+</C>
+<C c="4" r="1" s="0">
+<O>
+<![CDATA[adress]]></O>
+<PrivilegeControl/>
+<Expand/>
+</C>
+<C c="5" r="1" s="0">
+<PrivilegeControl/>
+<Expand/>
+</C>
+<C c="6" r="1" s="0">
+<PrivilegeControl/>
+<Expand/>
+</C>
+<C c="1" r="2" s="1">
+<O t="DSColumn">
+<Attributes dsName="test" columnName="id"/>
+<Complex/>
+<RG class="com.fr.report.cell.cellattr.core.group.FunctionGrouper"/>
+<Parameters/>
+</O>
+<PrivilegeControl/>
+<Widget class="com.fr.form.ui.TextEditor">
+<WidgetAttr disabled="true" invisible="true" description="">
+<PrivilegeControl/>
+</WidgetAttr>
+<TextAttr/>
+<Reg class="com.fr.form.ui.reg.NoneReg"/>
+<widgetValue/>
+</Widget>
+<Expand dir="0"/>
+</C>
+<C c="2" r="2" s="1">
+<O t="DSColumn">
+<Attributes dsName="test" columnName="name"/>
+<Complex/>
+<RG class="com.fr.report.cell.cellattr.core.group.FunctionGrouper"/>
+<Parameters/>
+</O>
+<PrivilegeControl/>
+<Widget class="com.fr.form.ui.TextEditor">
+<WidgetAttr description="">
+<PrivilegeControl/>
+</WidgetAttr>
+<TextAttr/>
+<Reg class="com.fr.form.ui.reg.NoneReg"/>
+<widgetValue/>
+</Widget>
+<Expand dir="0"/>
+</C>
+<C c="3" r="2" s="1">
+<O t="DSColumn">
+<Attributes dsName="test" columnName="description"/>
+<Complex/>
+<RG class="com.fr.report.cell.cellattr.core.group.FunctionGrouper"/>
+<Parameters/>
+</O>
+<PrivilegeControl/>
+<Widget class="com.fr.form.ui.TextEditor">
+<WidgetAttr description="">
+<PrivilegeControl/>
+</WidgetAttr>
+<TextAttr/>
+<Reg class="com.fr.form.ui.reg.NoneReg"/>
+<widgetValue/>
+</Widget>
+<Expand dir="0"/>
+</C>
+<C c="4" r="2" s="1">
+<O t="DSColumn">
+<Attributes dsName="test" columnName="address"/>
+<Complex/>
+<RG class="com.fr.report.cell.cellattr.core.group.FunctionGrouper"/>
+<Parameters/>
+</O>
+<PrivilegeControl/>
+<Widget class="com.fr.form.ui.TextEditor">
+<WidgetAttr description="">
+<PrivilegeControl/>
+</WidgetAttr>
+<TextAttr/>
+<Reg class="com.fr.form.ui.reg.NoneReg"/>
+<widgetValue/>
+</Widget>
+<Expand dir="0"/>
+</C>
+<C c="5" r="2" s="2">
+<PrivilegeControl/>
+<Widget class="com.fr.report.web.button.write.AppendRowButton">
+<WidgetAttr description="">
+<PrivilegeControl/>
+</WidgetAttr>
+<Text>
+<![CDATA[插入行]]></Text>
+<IconName>
+<![CDATA[add]]></IconName>
+<FixCell row="2" col="1"/>
+</Widget>
+<Expand/>
+</C>
+<C c="6" r="2" s="2">
+<PrivilegeControl/>
+<Widget class="com.fr.report.web.button.write.DeleteRowButton">
+<WidgetAttr description="">
+<PrivilegeControl/>
+</WidgetAttr>
+<Text>
+<![CDATA[删除行]]></Text>
+<IconName>
+<![CDATA[delete]]></IconName>
+<FixCell row="2" col="1"/>
+</Widget>
+<Expand/>
+</C>
+</CellElementList>
+<ReportAttrSet>
+<ReportSettings headerHeight="0" footerHeight="0">
+<PaperSetting/>
+</ReportSettings>
+<Header reportPageType="0">
+<Background name="NullBackground"/>
+<LeftList/>
+<CenterList/>
+<RightList/>
+</Header>
+<Footer reportPageType="0">
+<Background name="NullBackground"/>
+<LeftList/>
+<CenterList/>
+<RightList/>
+</Footer>
+</ReportAttrSet>
+<ReportWriteAttr>
+<SubmitVisitor class="com.fr.report.write.WClassSubmiter">
+<Name>
+<![CDATA[自定义提交1]]></Name>
+<SubmitTask class="com.fr.data.ClassSubmitJob">
+<ClassAttr className="com.fr.function.CustomizedSubmitUtil"/>
+<Property name="id">
+<O t="Formula" class="Formula">
+<Attributes>
+<![CDATA[=b3]]></Attributes>
+</O>
+</Property>
+<Property name="name">
+<O t="Formula" class="Formula">
+<Attributes>
+<![CDATA[=c3]]></Attributes>
+</O>
+</Property>
+<Property name="description">
+<O t="Formula" class="Formula">
+<Attributes>
+<![CDATA[=d3]]></Attributes>
+</O>
+</Property>
+<Property name="address">
+<O t="Formula" class="Formula">
+<Attributes>
+<![CDATA[=e3]]></Attributes>
+</O>
+</Property>
+</SubmitTask>
+</SubmitVisitor>
+</ReportWriteAttr>
+<PrivilegeControl/>
+</Report>
+<ReportParameterAttr>
+<Attributes showWindow="true" delayPlaying="true" windowPosition="1" align="0"/>
+<PWTitle>
+<![CDATA[参数]]></PWTitle>
+</ReportParameterAttr>
+<StyleList>
+<Style horizontal_alignment="0" imageLayout="1">
+<FRFont name="微软雅黑" style="1" size="72" foreground="-1"/>
+<Background name="ColorBackground" color="-10053121"/>
+<Border>
+<Top style="1" color="-2171170"/>
+<Bottom style="1" color="-2171170"/>
+<Left style="1" color="-2171170"/>
+<Right style="1" color="-2171170"/>
+</Border>
+</Style>
+<Style horizontal_alignment="0" imageLayout="1">
+<FRFont name="微软雅黑 Light" style="0" size="72"/>
+<Background name="NullBackground"/>
+<Border>
+<Top style="1" color="-2171170"/>
+<Bottom style="1" color="-2171170"/>
+<Left style="1" color="-2171170"/>
+<Right style="1" color="-2171170"/>
+</Border>
+</Style>
+<Style imageLayout="1">
+<FRFont name="SimSun" style="0" size="72"/>
+<Background name="NullBackground"/>
+<Border>
+<Top style="1" color="-2171170"/>
+<Bottom style="1" color="-2171170"/>
+<Left style="1" color="-2171170"/>
+<Right style="1" color="-2171170"/>
+</Border>
+</Style>
+</StyleList>
+<DesignerVersion DesignerVersion="IAA"/>
+<PreviewType PreviewType="1"/>
+<TemplateID/>
+</WorkBook>

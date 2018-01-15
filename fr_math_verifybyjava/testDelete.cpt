@@ -1,0 +1,600 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<WorkBook xmlVersion="20151125" releaseVersion="8.0.0">
+<TableDataMap>
+<TableData name="ds1" class="com.fr.data.impl.DBTableData">
+<Parameters/>
+<Attributes maxMemRowCount="-1"/>
+<Connection class="com.fr.data.impl.NameDatabaseConnection">
+<DatabaseName>
+<![CDATA[testdb]]></DatabaseName>
+</Connection>
+<Query>
+<![CDATA[select * from test2]]></Query>
+</TableData>
+</TableDataMap>
+<ReportWebAttr>
+<ServerPrinter/>
+<WebWriteContent>
+<Listener event="afterverify">
+<JavaScript class="com.fr.js.JavaScriptImpl">
+<Parameters/>
+<Content>
+<![CDATA[/*
+
+var i = 4;//这是初始行标,我们将从初始行标开始循环取出所有的数据
+var allResultArray = new Array();//这是最终存所有数据的Array
+console.log(allResultArray.length);
+var message = new Array();
+var flag="Y" ;//这是正确标识符,若为Y则是正确,为N是错误
+while (String(contentPane.curLGP.getCellValue(2, i)).length > 0) {
+    var lineMap = new Map();//这是单行的map,包含4个键值对
+    lineMap.set("company", contentPane.curLGP.getCellValue(2, i));//取公司
+    lineMap.set("deptment", contentPane.curLGP.getCellValue(3, i));//取部门
+    lineMap.set("periodstart", contentPane.curLGP.getCellValue(5, i));//取期间起
+    lineMap.set("periodend", contentPane.curLGP.getCellValue(6, i));//取期间至
+    allResultArray.push(lineMap);
+    i = i + 1;
+}
+
+
+console.log(allResultArray);
+for (var y = 0; y < allResultArray.length; y++) {
+    var loopMap = allResultArray[y]A;
+    console.log(loopMap);
+    for (var j = 0; j < allResultArray.length; j++) {
+        var compareMap = allResultArray[j]A;
+        console.log(["comp", compareMap]A);
+        console.log("y=" + y + "  j=" + j);
+        if (j === y) {
+           // continue;
+           console.log("同一数据,不进行比较");
+        } else {
+            console.log("enter else block");
+            //console.log(loopMap.get("periodstart"));
+            console.log(compareMap);
+            console.log(loopMap.get("company") === compareMap.get("company") && loopMap.get("deptment") === compareMap.get("deptment"));
+           // console.log(loopMap.get("periodstart"));
+            //console.log(loopMap.get("periodstart").substr(0, 4));
+            //console.log(Number(String(loopMap.get("periodstart").substr(0, 4)) + String(loopMap.get("periodstart").substr(5, 2))));
+            if (loopMap.get("company") === compareMap.get("company") && loopMap.get("deptment") === compareMap.get("deptment")) {
+                var f_f = Number(String(loopMap.get("periodstart").substr(0, 4)) + String(loopMap.get("periodstart").substr(5, 2)));
+                var f_s = Number(String(loopMap.get("periodend").substr(0, 4)) + String(loopMap.get("periodend").substr(5, 2)));
+                var s_f = Number(String(compareMap.get("periodstart").substr(0, 4)) + String(compareMap.get("periodstart").substr(5, 2)));
+                var s_s = Number(String(compareMap.get("periodend").substr(0, 4)) + String(compareMap.get("periodend").substr(5, 2)));
+
+                console.log(f_f);
+                console.log(f_s);
+                console.log(s_f);
+                console.log(s_s);
+                console.log((f_f >= s_f && f_f <= s_s) || (f_s >= s_f && f_s <= s_s) || (s_f >= f_f && s_f <= f_s) || (s_s >= f_f && s_s <= f_s));
+                if ((f_f >= s_f && f_f <= s_s) || (f_s >= s_f && f_s <= s_s) || (s_f >= f_f && s_f <= f_s) || (s_s >= f_f && s_s <= f_s)) {
+                    var logmessage="第"+(j+1)+"行的数据与第"+(y+1)+"行的数据重叠";
+                    console.log(logmessage);
+                    //fr_verifyinfo.info = [1, ":"]A;
+                    //fr_verifyinfo.success = "false";
+                    message.push(logmessage);
+                    flag="N";
+                }
+
+            } 
+        }
+
+    }
+}
+console.log(flag);
+if(flag==="Y"){
+    console.log("进入成功方法体")
+    fr_verifyinfo.info="Verify Successfully!";
+    fr_verifyinfo.success="true";
+    //contentPane.writeReport();  
+    _g('${sessionID}').writeReport();
+    FR.Msg.toast("填报成功");
+    //location.reload();  
+    return false;     
+              
+    
+}else if(flag==="N"){
+    console.log("进入未成功方法体");
+    fr_verifyinfo.info=message;
+    fr_verifyinfo.success="false";
+    console.log(message[0]A);
+    FR.Msg.alert("警告",message[0]A);
+    //location.reload();  
+    return false;    
+}
+*/]]></Content>
+</JavaScript>
+</Listener>
+<ToolBars>
+<ToolBarManager>
+<Location>
+<Embed position="1"/>
+</Location>
+<ToolBar>
+<Widget class="com.fr.report.web.button.write.Submit">
+<WidgetAttr description="">
+<PrivilegeControl/>
+</WidgetAttr>
+<Text>
+<![CDATA[${i18n('Utils-Submit')}]]></Text>
+<IconName>
+<![CDATA[submit]]></IconName>
+<Verify failVerifySubmit="false" value="true"/>
+<Sheet onlySubmitSelect="false"/>
+</Widget>
+<Widget class="com.fr.report.web.button.ExcelO">
+<WidgetAttr description="">
+<PrivilegeControl/>
+</WidgetAttr>
+<Text>
+<![CDATA[Excel(原样导出)]]></Text>
+<IconName>
+<![CDATA[excel]]></IconName>
+</Widget>
+<Widget class="com.fr.report.web.button.write.ImportExcelData">
+<WidgetAttr description="">
+<PrivilegeControl/>
+</WidgetAttr>
+<Text>
+<![CDATA[${i18n('Utils-Import_Excel_Data')}]]></Text>
+<IconName>
+<![CDATA[excel]]></IconName>
+</Widget>
+</ToolBar>
+</ToolBarManager>
+</ToolBars>
+<SelectedColor/>
+<WebWrite SheetPosition="3"/>
+<RptLocation isShowAtLeft="true"/>
+<UnloadCheck/>
+<ShowWidgets/>
+<OtherAttr isAutoStash="false"/>
+</WebWriteContent>
+</ReportWebAttr>
+<ReportExportAttr>
+<ExcelExportAttr/>
+<PDFExportAttr/>
+<HTMLExportAttr/>
+<WordExportAttr/>
+</ReportExportAttr>
+<Report class="com.fr.report.worksheet.WorkSheet" name="sheet1">
+<ReportPageAttr>
+<HR F="1" T="3"/>
+<FR/>
+<HC/>
+<FC/>
+</ReportPageAttr>
+<ColumnPrivilegeControl/>
+<RowPrivilegeControl/>
+<RowHeight defaultValue="723900">
+<![CDATA[571500,1523520,288000,1333440,1333440,723900,723900,723900,723900,723900,723900]]></RowHeight>
+<ColumnWidth defaultValue="2743200">
+<![CDATA[723900,2743200,5600700,5867400,4419600,4229100,2743200,2743200,2743200,2743200,2743200]]></ColumnWidth>
+<CellElementList>
+<C c="0" r="0">
+<PrivilegeControl/>
+<Expand/>
+</C>
+<C c="0" r="1">
+<PrivilegeControl/>
+<Expand/>
+</C>
+<C c="2" r="1" cs="7">
+<O>
+<![CDATA[分摊比例维护界面]]></O>
+<PrivilegeControl/>
+<Expand/>
+</C>
+<C c="2" r="3">
+<O>
+<![CDATA[公司]]></O>
+<PrivilegeControl/>
+<Expand/>
+</C>
+<C c="3" r="3">
+<O>
+<![CDATA[部门]]></O>
+<PrivilegeControl/>
+<Expand/>
+</C>
+<C c="4" r="3">
+<O>
+<![CDATA[期间自]]></O>
+<PrivilegeControl/>
+<Expand/>
+</C>
+<C c="5" r="3">
+<O>
+<![CDATA[期间至]]></O>
+<PrivilegeControl/>
+<Expand/>
+</C>
+<C c="6" r="3">
+<O>
+<![CDATA[deleteflag]]></O>
+<PrivilegeControl/>
+<Expand/>
+</C>
+<C c="7" r="3" cs="2">
+<O>
+<![CDATA[操作]]></O>
+<PrivilegeControl/>
+<Expand/>
+</C>
+<C c="1" r="4">
+<O t="DSColumn">
+<Attributes dsName="ds1" columnName="id"/>
+<Complex/>
+<RG class="com.fr.report.cell.cellattr.core.group.FunctionGrouper"/>
+<Parameters/>
+</O>
+<PrivilegeControl/>
+<Expand dir="0"/>
+</C>
+<C c="2" r="4" s="0">
+<O t="DSColumn">
+<Attributes dsName="ds1" columnName="company"/>
+<Complex/>
+<RG class="com.fr.report.cell.cellattr.core.group.FunctionGrouper"/>
+<Parameters/>
+</O>
+<PrivilegeControl/>
+<Widget class="com.fr.form.ui.TextEditor">
+<WidgetAttr description="">
+<PrivilegeControl/>
+</WidgetAttr>
+<TextAttr/>
+<Reg class="com.fr.form.ui.reg.NoneReg"/>
+<widgetValue/>
+</Widget>
+<HighlightList>
+<Highlight class="com.fr.report.cell.cellattr.highlight.DefaultHighlight">
+<Name>
+<![CDATA[条件属性1]]></Name>
+<Condition class="com.fr.data.condition.FormulaCondition">
+<Formula>
+<![CDATA[row() % 2 = 0]]></Formula>
+</Condition>
+<HighlightAction class="com.fr.report.cell.cellattr.highlight.BackgroundHighlightAction">
+<Scope val="1"/>
+<Background name="ColorBackground" color="-3677959"/>
+</HighlightAction>
+</Highlight>
+</HighlightList>
+<Present class="com.fr.base.present.DictPresent">
+<Dictionary class="com.fr.data.impl.TableDataDictionary">
+<FormulaDictAttr kiName="DIM_VALUE" viName="DESCRIPTION"/>
+<TableDataDictAttr>
+<TableData class="com.fr.data.impl.NameTableData">
+<Name>
+<![CDATA[公司]]></Name>
+</TableData>
+</TableDataDictAttr>
+</Dictionary>
+</Present>
+<Expand dir="0"/>
+</C>
+<C c="3" r="4" s="0">
+<O t="DSColumn">
+<Attributes dsName="ds1" columnName="department"/>
+<Complex/>
+<RG class="com.fr.report.cell.cellattr.core.group.FunctionGrouper"/>
+<Parameters/>
+</O>
+<PrivilegeControl/>
+<Widget class="com.fr.form.ui.TextEditor">
+<WidgetAttr description="">
+<PrivilegeControl/>
+</WidgetAttr>
+<TextAttr/>
+<Reg class="com.fr.form.ui.reg.NoneReg"/>
+<widgetValue/>
+</Widget>
+<Present class="com.fr.base.present.DictPresent">
+<Dictionary class="com.fr.data.impl.TableDataDictionary">
+<FormulaDictAttr kiName="DIM_VALUE" viName="DESCRIPTION"/>
+<TableDataDictAttr>
+<TableData class="com.fr.data.impl.NameTableData">
+<Name>
+<![CDATA[部门]]></Name>
+</TableData>
+</TableDataDictAttr>
+</Dictionary>
+</Present>
+<Expand dir="0"/>
+</C>
+<C c="4" r="4" s="0">
+<O t="DSColumn">
+<Attributes dsName="ds1" columnName="periodfrom"/>
+<Complex/>
+<RG class="com.fr.report.cell.cellattr.core.group.FunctionGrouper"/>
+<Parameters/>
+</O>
+<PrivilegeControl/>
+<Widget class="com.fr.form.ui.TextEditor">
+<WidgetAttr description="">
+<PrivilegeControl/>
+</WidgetAttr>
+<TextAttr/>
+<Reg class="com.fr.form.ui.reg.NoneReg"/>
+<widgetValue/>
+</Widget>
+<Expand dir="0"/>
+</C>
+<C c="5" r="4" s="0">
+<O t="DSColumn">
+<Attributes dsName="ds1" columnName="periodto"/>
+<Complex/>
+<RG class="com.fr.report.cell.cellattr.core.group.FunctionGrouper"/>
+<Parameters/>
+</O>
+<PrivilegeControl/>
+<Widget class="com.fr.form.ui.TextEditor">
+<WidgetAttr description="">
+<PrivilegeControl/>
+</WidgetAttr>
+<TextAttr/>
+<Reg class="com.fr.form.ui.reg.NoneReg"/>
+<widgetValue/>
+</Widget>
+<Expand dir="0"/>
+</C>
+<C c="6" r="4">
+<O>
+<![CDATA[N]]></O>
+<PrivilegeControl/>
+<Expand/>
+</C>
+<C c="7" r="4" s="0">
+<PrivilegeControl/>
+<Widget class="com.fr.report.web.button.write.AppendRowButton">
+<WidgetAttr description="">
+<PrivilegeControl/>
+</WidgetAttr>
+<Text>
+<![CDATA[插入行]]></Text>
+<IconName>
+<![CDATA[add]]></IconName>
+<FixCell row="4" col="1"/>
+</Widget>
+<Expand/>
+</C>
+<C c="8" r="4" s="0">
+<PrivilegeControl/>
+<Widget class="com.fr.report.web.button.write.DeleteRowButton">
+<Listener event="click">
+<JavaScript class="com.fr.js.JavaScriptImpl">
+<Parameters>
+<Parameter>
+<Attributes name="row"/>
+<O t="Formula" class="Formula">
+<Attributes>
+<![CDATA[=row()]]></Attributes>
+</O>
+</Parameter>
+<Parameter>
+<Attributes name="col"/>
+<O t="Formula" class="Formula">
+<Attributes>
+<![CDATA[=col()]]></Attributes>
+</O>
+</Parameter>
+</Parameters>
+<Content>
+<![CDATA[contentPane.setCellValue(col-3,row-1,"Y");
+]]></Content>
+</JavaScript>
+</Listener>
+<WidgetAttr description="">
+<PrivilegeControl/>
+</WidgetAttr>
+<Text>
+<![CDATA[删除行]]></Text>
+<IconName>
+<![CDATA[delete]]></IconName>
+<FixCell row="4" col="1"/>
+</Widget>
+<Expand/>
+</C>
+<C c="9" r="4">
+<O>
+<![CDATA[s]]></O>
+<PrivilegeControl/>
+<Widget class="com.fr.form.ui.FreeButton">
+<Listener event="click">
+<JavaScript class="com.fr.js.JavaScriptImpl">
+<Parameters>
+<Parameter>
+<Attributes name="row"/>
+<O t="Formula" class="Formula">
+<Attributes>
+<![CDATA[=row()]]></Attributes>
+</O>
+</Parameter>
+<Parameter>
+<Attributes name="col"/>
+<O t="Formula" class="Formula">
+<Attributes>
+<![CDATA[=col()]]></Attributes>
+</O>
+</Parameter>
+</Parameters>
+<Content>
+<![CDATA[console.log("row="+row);
+console.log("col="+col);
+contentPane.setCellValue(col-4,row-1,"Y");]]></Content>
+</JavaScript>
+</Listener>
+<WidgetAttr description="">
+<PrivilegeControl/>
+</WidgetAttr>
+<Text>
+<![CDATA[]]></Text>
+</Widget>
+<Expand/>
+</C>
+<C c="3" r="8" s="1">
+<PrivilegeControl/>
+<Expand/>
+</C>
+</CellElementList>
+<ReportAttrSet>
+<ReportSettings headerHeight="0" footerHeight="0">
+<FrozenColumnRow columnrow="C5"/>
+<PaperSetting/>
+</ReportSettings>
+<Header reportPageType="0">
+<Background name="NullBackground"/>
+<LeftList/>
+<CenterList/>
+<RightList/>
+</Header>
+<Footer reportPageType="0">
+<Background name="NullBackground"/>
+<LeftList/>
+<CenterList/>
+<RightList/>
+</Footer>
+</ReportAttrSet>
+<ReportWriteAttr>
+<SubmitVisitor class="com.fr.report.write.BuiltInSQLSubmiter">
+<Name>
+<![CDATA[内置SQL3]]></Name>
+<Attributes dsName="testdb"/>
+<DMLConfig class="com.fr.write.config.IntelliDMLConfig">
+<Table schema="" name="test2"/>
+<ColumnConfig name="id" isKey="true" skipUnmodified="false">
+<ColumnRow column="1" row="4"/>
+</ColumnConfig>
+<ColumnConfig name="company" isKey="false" skipUnmodified="false">
+<ColumnRow column="2" row="4"/>
+</ColumnConfig>
+<ColumnConfig name="department" isKey="false" skipUnmodified="false">
+<ColumnRow column="3" row="4"/>
+</ColumnConfig>
+<ColumnConfig name="periodfrom" isKey="false" skipUnmodified="false">
+<ColumnRow column="4" row="4"/>
+</ColumnConfig>
+<ColumnConfig name="periodto" isKey="false" skipUnmodified="false">
+<ColumnRow column="5" row="4"/>
+</ColumnConfig>
+<Condition class="com.fr.data.condition.ListCondition"/>
+</DMLConfig>
+</SubmitVisitor>
+<TopVerifier class="com.fr.report.write.ValueVerifier">
+<name>
+<![CDATA[内置校验1]]></name>
+<VerifyItem class="com.fr.data.VerifyItem">
+<O t="Formula" class="Formula">
+<Attributes>
+<![CDATA[=D5 > 0]]></Attributes>
+</O>
+<message>
+<![CDATA[="分摊比例请填写大于0的数值"]]></message>
+</VerifyItem>
+<VerifyItem class="com.fr.data.VerifyItem">
+<O t="Formula" class="Formula">
+<Attributes>
+<![CDATA[=len(C5) != 0]]></Attributes>
+</O>
+<message>
+<![CDATA[="请填写公司"]]></message>
+</VerifyItem>
+<VerifyItem class="com.fr.data.VerifyItem">
+<O t="Formula" class="Formula">
+<Attributes>
+<![CDATA[=len(D5) != 0]]></Attributes>
+</O>
+<message>
+<![CDATA[="请填写部门"]]></message>
+</VerifyItem>
+<VerifyItem class="com.fr.data.VerifyItem">
+<O t="Formula" class="Formula">
+<Attributes>
+<![CDATA[=len(E5) != 0]]></Attributes>
+</O>
+<message>
+<![CDATA[="请填写期间自"]]></message>
+</VerifyItem>
+</TopVerifier>
+<TopVerifier class="com.fr.report.write.WClassVerifier">
+<name>
+<![CDATA[自定义校验2]]></name>
+<ClassVerifyJob>
+<ClassAttr className="com.fr.demo.VerifyPeriodInBetween"/>
+<Property name="company">
+<ColumnRow column="2" row="4"/>
+</Property>
+<Property name="department">
+<ColumnRow column="3" row="4"/>
+</Property>
+<Property name="periodfrom">
+<ColumnRow column="4" row="4"/>
+</Property>
+<Property name="periodto">
+<ColumnRow column="5" row="4"/>
+</Property>
+<Property name="deleteflag">
+<ColumnRow column="6" row="4"/>
+</Property>
+</ClassVerifyJob>
+</TopVerifier>
+</ReportWriteAttr>
+<PrivilegeControl/>
+</Report>
+<ReportParameterAttr>
+<Attributes showWindow="true" delayPlaying="true" windowPosition="1" align="0"/>
+<PWTitle>
+<![CDATA[参数]]></PWTitle>
+<Parameter>
+<Attributes name="p_user_name"/>
+<O>
+<![CDATA[]]></O>
+</Parameter>
+<Parameter>
+<Attributes name="p_ledger_id"/>
+<O>
+<![CDATA[]]></O>
+</Parameter>
+<Parameter>
+<Attributes name="p_company"/>
+<O>
+<![CDATA[]]></O>
+</Parameter>
+<Parameter>
+<Attributes name="p_dept"/>
+<O>
+<![CDATA[]]></O>
+</Parameter>
+<Parameter>
+<Attributes name="p_date_from"/>
+<O>
+<![CDATA[]]></O>
+</Parameter>
+<Parameter>
+<Attributes name="p_date_to"/>
+<O>
+<![CDATA[]]></O>
+</Parameter>
+</ReportParameterAttr>
+<StyleList>
+<Style horizontal_alignment="0" imageLayout="1">
+<FRFont name="微软雅黑" style="0" size="72"/>
+<Background name="ColorBackground" color="-1"/>
+<Border>
+<Top style="1" color="-4144960"/>
+<Bottom style="1" color="-4144960"/>
+<Left style="1" color="-4144960"/>
+<Right style="1" color="-4144960"/>
+</Border>
+</Style>
+<Style imageLayout="1">
+<FRFont name="宋体" style="0" size="72"/>
+<Background name="NullBackground"/>
+<Border/>
+</Style>
+</StyleList>
+<DesignerVersion DesignerVersion="IAA"/>
+<PreviewType PreviewType="0"/>
+<TemplateID TemplateID="b57f3a8c-5e58-4296-bfb3-d614c60704c1"/>
+</WorkBook>
